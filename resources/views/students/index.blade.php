@@ -61,9 +61,7 @@
                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="editRecord(<?php echo $student->id ?>)"> Edit </button>
                                 </div>
                                 <div class="col-sm-4 ml-4 text-right">
-                                   
-                                <a href="{{route('deleteStudent',[ $student->id])}}" class="btn btn-danger">Delete</a>
-
+                                   <a href="{{route('deleteStudent',[ $student->id])}}" class="btn btn-danger">Delete</a>
                                 </div>
                             </div>
                         </td>
@@ -161,20 +159,8 @@
             document.getElementById('edit_f_name').value = document.getElementById('f_name-'+std_id).innerHTML
             document.getElementById('edit_l_name').value = document.getElementById('l_name-'+std_id).innerHTML
             document.getElementById('edit_dob').value = document.getElementById('dob-'+std_id).innerHTML
-
-
-
-            // const numbers = document.getElementsByName('phone-numbers-' + std_id).length;
-            // var i;
-            // for (i = 0; i < numbers; i++) {
-            //     const div_with_input_and_del_icon = document.createElement('div');
-            //     const _div = '<input type="text" class="form-control" name="edit_phone_number[]" value="'+document.getElementById((i+1)+'-'+std_id).innerHTML+'" placeholder="Phone Number"/><i class="fa fa-trash-o del-icon" style="font-size:40px;color:red;" onclick="deletePhoneNumber()"></i>'
-            //     div_with_input_and_del_icon.innerHTML = _div
-
-            //     const parent_div = document.getElementById('edit_phone_number_parent_div');
-
-            //     parent_div.appendChild(div_with_input_and_del_icon);
-            // }
+            document.getElementById('edit_id').value = std_id;
+            
         }
 
         function saveChanges(url){
@@ -217,8 +203,5 @@
             }
         });
 
-        // function closeModel(){
-        //     document.getElementById('edit_phone_number_parent_div').innerHTML=""
-        // }
 
 </script>

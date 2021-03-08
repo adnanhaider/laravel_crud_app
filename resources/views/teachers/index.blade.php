@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container mt-4">
     Teachers:
-    <form action="{{ route('teachers') }}" method="POST">
+    <form action="{{ route('teachers',) }}" method="POST">
     @csrf
         <input class="form-control" type="text" name="f_name" placeholder="First Name">
         @error('f_name')
@@ -40,7 +40,7 @@
        <th>First Name</th>
        <th>Last Name</th>
        <th>DOB</th>
-       <th>Email</th>
+       <!-- <th>Email</th> -->
        <!-- <th>Phone Number</th> -->
        <th>Operations</th>
        </thead>
@@ -48,16 +48,16 @@
            @foreach($teachers as $teacher)
            @if($teacher->user->role == 'teacher')
                <tr>
-                   <td id='id-{{$teacher->id}}' class ="id" >{{$teacher->id}}</td>
-                   <td id='f_name-{{$teacher->id}}' class ="f_name">{{$teacher->f_name}}</td>
-                   <td id='l_name-{{$teacher->id}}' class ="l_name">{{$teacher->l_name}}</td>
-                   <td id='dob-{{$teacher->id}}' class ="dob">{{$teacher->dob}}</td>
-                   <td id='email-{{$teacher->id}}' class ="email">{{$teacher->user->email}}</td>
+                   <td id='id-{{$teacher->id}}' >{{$teacher->id}}</td>
+                   <td id='f_name-{{$teacher->id}}'>{{$teacher->f_name}}</td>
+                   <td id='l_name-{{$teacher->id}}' >{{$teacher->l_name}}</td>
+                   <td id='dob-{{$teacher->id}}' >{{$teacher->dob}}</td>
+                   <!-- <td id='email-{{$teacher->id}}'>{{$teacher->user->email}}</td> -->
                   
                    <td>
                        <div class="row">
                            <div class="col-sm-4 text-left">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="editRecord(<?php echo $teacher->id; ?>)"> Edit </button>
+                                <button type="button" class="btn btn-info edit" data-toggle="modal" data-target="#exampleModal" onclick="editRecord(<?php echo $teacher->id;?>)"> Edit </button>
                            </div>
                            <div class="col-sm-4 ml-4 text-right">
                                 <a href="{{route('deleteTeacher',[ $teacher->id])}}" class="btn btn-danger">Delete</a>
@@ -68,7 +68,7 @@
             @endif
                <div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog" role="document">
-                   <div class="modal-content">
+                <div class="modal-content">
                    <div class="modal-header">
                        <h5 class="modal-title text-dark" id="exampleModalLabel">Edit Teacher</h5>
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -78,7 +78,7 @@
                    <div class="container modal-body text-dark">
                        <form action="{{route('updateTeacher')}}" method="POST" id="modal-form-id">
                        @csrf
-                            <input class="form-control" type="hidden" id="edit_id" name="edit_id" value="{{$teacher->id}}">
+                        <input class="form-control" type="hidden" id="edit_id" name="edit_id" value="{{$teacher->id}}">
                            <input class="form-control" type="text" id="edit_f_name" name="edit_f_name" placeholder="First Name">
                            @error('f_name')
                                {{$message}}
@@ -100,7 +100,6 @@
                             </div>
                        </form>
                    </div>
-                   
                    </div>
                </div>
            </div>  
@@ -156,11 +155,19 @@ function deleteRecord(id){
     alert('this id is going to be deleted ', id)
 }
 
+document.addEventListener('click', function(e){
+    let ele = e.target;
+    if(ele.classList.contains('edit')){
+        console.log(ele);
+    }
+});
+
+
 function editRecord(std_id){
     document.getElementById('edit_f_name').value = document.getElementById('f_name-'+std_id).innerHTML
     document.getElementById('edit_l_name').value = document.getElementById('l_name-'+std_id).innerHTML
     document.getElementById('edit_dob').value = document.getElementById('dob-'+std_id).innerHTML
-
+    document.getElementById('edit_id').value = std_id;
 
 
     // const numbers = document.getElementsByName('phone-numbers-' + std_id).length;

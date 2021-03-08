@@ -55,7 +55,7 @@ class StudentController extends Controller{
             'edit_l_name'=>'required',
             'edit_dob'=>'required',
         ]);
-            // Student::updateData($request);
+
         Student::where('id',$request->edit_id)->update([
             'f_name'=>$request->edit_f_name,
             'l_name'=>$request->edit_l_name,

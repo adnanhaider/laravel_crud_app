@@ -15,7 +15,7 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->text('course_name');
             $table->bigInteger('credit_hours');
             $table->bigInteger('teacher_id')->contrained()->onDelete('cascade');
             $table->timestamps();

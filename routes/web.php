@@ -39,3 +39,5 @@ Route::get('/deleteteacher/{id}', [TeacherController::class, 'deleteTeacher'])->
 
 Route::get('/courses', [CourseController::class, 'index'])->name('courses');
 Route::post('/courses', [CourseController::class, 'addCourse']);
+Route::get('/updateCourses', [CourseController::class, 'updateCourse'])->name('updateCourse');
+Route::get('/course/{id}', [CourseController::class, 'deleteCourse'])->name('deleteCourse');
